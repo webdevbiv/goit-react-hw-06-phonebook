@@ -1,58 +1,63 @@
 import { useState, useEffect } from 'react';
-import { ContactForm } from './ContactForm/ContactForm'
-import ContactList from './ContactList/ContactList'
-import { Filter } from './Filter/Filter'
+import { ContactForm } from './ContactForm/ContactForm';
+import ContactList from './ContactList/ContactList';
+import { Filter } from './Filter/Filter';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 
 export const App = () => {
   const [contacts, setContacts] = useState(
-    () => JSON.parse(localStorage.getItem('contacts')) ?? [],
-  )
-  const [filter, setFilter] = useState('')
+    () => JSON.parse(localStorage.getItem('contacts')) ?? []
+  );
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts))
-  }, [contacts])
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
   const handleContactSubmit = ({ name, number }) => {
-    if (contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {
+    if (
+      contacts.some(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
       toast.warn(`🦄 ${name} is already in the contacts.`, {
-        position: "top-center",
+        position: 'top-center',
         autoClose: false,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: false,
         progress: undefined,
-        theme: "light",
-      })
-    }
-    else {
+        theme: 'light',
+      });
+    } else {
       setContacts(prev => {
-        return [{ id: nanoid(4), name, number }, ...prev]
-      })
+        return [{ id: nanoid(4), name, number }, ...prev];
+      });
     }
-  }
+  };
 
-  const handleFilterChange = (e) => {
-    setFilter(e.target.value)
-  }
+  const handleFilterChange = e => {
+    setFilter(e.target.value);
+  };
 
   const filteredContacts = () => {
     const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase()))
-    return filteredContacts
-  }
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+    return filteredContacts;
+  };
 
-  const handleContactDelete = (id) => {
-    setContacts((prev) => (prev.filter(item => item.id !== id)))
-  }
+  const handleContactDelete = id => {
+    setContacts(prev => prev.filter(item => item.id !== id));
+  };
 
   return (
     <div className={'container'}>
+      Test
       <ToastContainer
         position="top-center"
         autoClose={false}
@@ -74,6 +79,5 @@ export const App = () => {
         />
       </>
     </div>
-  )
-}
-
+  );
+};
