@@ -57,7 +57,6 @@ export const App = () => {
 
   return (
     <div className={'container'}>
-      Test
       <ToastContainer
         position="top-center"
         autoClose={false}
