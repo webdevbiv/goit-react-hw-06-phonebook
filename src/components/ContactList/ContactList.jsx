@@ -17,7 +17,7 @@ function ContactList({ contacts, onDelete }) {
             type="button"
             onClick={() => onDelete(contact.id)}
           >
-            Deletes
+            Delete
           </Button>
         </ListGroup.Item>
       ))}
