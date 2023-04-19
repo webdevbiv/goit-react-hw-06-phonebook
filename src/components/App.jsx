@@ -1,13 +1,20 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { update } from 'redux/clicksSlice';
 import { useState, useEffect } from 'react';
+
 import { ContactForm } from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Button from 'react-bootstrap/Button';
 
 import { nanoid } from 'nanoid';
 
 export const App = () => {
+  const numberOfClicks = useSelector(state => state.clicks.value);
+  const dispatch = useDispatch();
+  console.log(numberOfClicks);
   const [contacts, setContacts] = useState(
     () => JSON.parse(localStorage.getItem('contacts')) ?? []
   );
@@ -67,6 +74,13 @@ export const App = () => {
         draggable={false}
         theme="light"
       />
+      <Button
+        variant="primary"
+        type="submit"
+        onClick={() => dispatch(update())}
+      >
+        Click me: {numberOfClicks}
+      </Button>
       <h1 className={'title'}>Phonebook</h1>
       <ContactForm onSubmit={handleContactSubmit} />
       <h2 className={'title'}>Contacts</h2>
