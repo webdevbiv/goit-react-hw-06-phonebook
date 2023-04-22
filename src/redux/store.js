@@ -11,19 +11,13 @@
 // export const presistor = presistStore(store);
 
 import { configureStore } from '@reduxjs/toolkit';
-import { clicksSlice } from './clicksSlice';
-import { persistStore, persistReducer } from 'redux-persist';
-import { storage } from 'redux-persist';
-
-const persistConfig = {
-  key: 'root',
-  storage,
-};
-
-const persistedClicksReducer = persistReducer(persistConfig);
+import { persistStore } from 'redux-persist';
+import { clicksReducer } from './clicksSlice';
 
 export const store = configureStore({
   reducer: {
-    clicks: clicksSlice.reducer,
+    clicks: clicksReducer,
   },
 });
+
+export const persistor = persistStore(store);
