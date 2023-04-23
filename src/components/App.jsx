@@ -9,8 +9,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Button from 'react-bootstrap/Button';
 
-import { nanoid } from 'nanoid';
-
 export const App = () => {
   const numberOfClicks = useSelector(state => state.clicks.value);
   const contactsState = useSelector(state => state.contacts.list);
@@ -94,7 +92,6 @@ export const App = () => {
         />
         <ContactList
         // contacts={filteredContacts() !== '' ? filteredContacts() : contacts}
-        // onDelete={handleContactDelete}
         />
       </>
     </div>

@@ -23,11 +23,13 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { filterReducer } from './filterSlice';
 
 export const store = configureStore({
   reducer: {
     clicks: clicksReducer,
     contacts: contactsReducer,
+    filter: filterReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

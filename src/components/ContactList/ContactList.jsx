@@ -1,15 +1,27 @@
+import { deleteContact } from 'redux/contactsSlice';
 import React from 'react';
-// import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import s from '../ContactList/ContactList.module.scss';
+
 function ContactList() {
-  const contacts = useSelector(state => state.contacts.list);
+  const distpatch = useDispatch();
+
+  const filter = useSelector(state => state.filter.value);
+  const contacts = useSelector(state => state.contacts.list) ?? filter;
+
+  const filteredContacts = () => {
+    const filteredContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+    return filteredContacts;
+  };
+
   return (
     <ListGroup>
-      {contacts.map(contact => (
+      {filteredContacts().map(contact => (
         <ListGroup.Item key={contact.id} className={s.item}>
           <div>
             {contact.name}: {contact.number}
@@ -17,7 +29,7 @@ function ContactList() {
           <Button
             variant="primary"
             type="button"
-            // onClick={() => onDelete(contact.id)}
+            onClick={() => distpatch(deleteContact(contact.id))}
           >
             Delete
           </Button>

@@ -6,10 +6,11 @@ const constactsSlice = createSlice({
   name: 'contacts',
   initialState: { list: [] },
   reducers: {
-    addContact: {
-      reducer(state, action) {
-        state.list.push(action.payload);
-      },
+    addContact(state, action) {
+      state.list = [...state.list, action.payload];
+    },
+    deleteContact(state, action) {
+      state.list = state.list.filter(({ id }) => id !== action.payload);
     },
   },
 });
@@ -24,4 +25,4 @@ export const contactsReducer = persistReducer(
   constactsSlice.reducer
 );
 
-export const { addContact } = constactsSlice.actions;
+export const { addContact, deleteContact } = constactsSlice.actions;

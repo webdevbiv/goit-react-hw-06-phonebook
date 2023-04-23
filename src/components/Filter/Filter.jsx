@@ -1,8 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-export function Filter({ onChange }) {
+import { useDispatch } from 'react-redux';
+import { filterContacts } from 'redux/filterSlice';
+
+export function Filter() {
+  const dispatch = useDispatch();
+
+  const onChange = e => {
+    const filter = e.target;
+    dispatch(filterContacts(filter.value));
+  };
+
   return (
     <Form.Group className="mb-3">
       <Form.Label>Find contacts by name</Form.Label>
@@ -16,7 +25,3 @@ export function Filter({ onChange }) {
     </Form.Group>
   );
 }
-
-// Filter.propTypes = {
-//     onChange: PropTypes.func.isRequired
-// }
