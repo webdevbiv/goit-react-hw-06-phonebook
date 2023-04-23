@@ -13,54 +13,56 @@ import { nanoid } from 'nanoid';
 
 export const App = () => {
   const numberOfClicks = useSelector(state => state.clicks.value);
+  const contactsState = useSelector(state => state.contacts.list);
   const dispatch = useDispatch();
-  console.log(numberOfClicks);
-  const [contacts, setContacts] = useState(
-    () => JSON.parse(localStorage.getItem('contacts')) ?? []
-  );
-  const [filter, setFilter] = useState('');
+  console.log(contactsState);
 
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  // const [contacts, setContacts] = useState(
+  //   () => JSON.parse(localStorage.getItem('contacts')) ?? []
+  // );
+  // const [filter, setFilter] = useState('');
 
-  const handleContactSubmit = ({ name, number }) => {
-    if (
-      contacts.some(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      )
-    ) {
-      toast.warn(`🦄 ${name} is already in the contacts.`, {
-        position: 'top-center',
-        autoClose: false,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: 'light',
-      });
-    } else {
-      setContacts(prev => {
-        return [{ id: nanoid(4), name, number }, ...prev];
-      });
-    }
-  };
+  // useEffect(() => {
+  //   localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
 
-  const handleFilterChange = e => {
-    setFilter(e.target.value);
-  };
+  // const handleContactSubmit = ({ name, number }) => {
+  //   if (
+  //     contacts.some(
+  //       contact => contact.name.toLowerCase() === name.toLowerCase()
+  //     )
+  //   ) {
+  //     toast.warn(`🦄 ${name} is already in the contacts.`, {
+  //       position: 'top-center',
+  //       autoClose: false,
+  //       hideProgressBar: true,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: false,
+  //       progress: undefined,
+  //       theme: 'light',
+  //     });
+  //   } else {
+  //     setContacts(prev => {
+  //       return [{ id: nanoid(4), name, number }, ...prev];
+  //     });
+  //   }
+  // };
 
-  const filteredContacts = () => {
-    const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-    return filteredContacts;
-  };
+  // const handleFilterChange = e => {
+  //   setFilter(e.target.value);
+  // };
 
-  const handleContactDelete = id => {
-    setContacts(prev => prev.filter(item => item.id !== id));
-  };
+  // const filteredContacts = () => {
+  //   const filteredContacts = contacts.filter(contact =>
+  //     contact.name.toLowerCase().includes(filter.toLowerCase())
+  //   );
+  //   return filteredContacts;
+  // };
+
+  // const handleContactDelete = id => {
+  //   setContacts(prev => prev.filter(item => item.id !== id));
+  // };
 
   return (
     <div className={'container'}>
@@ -82,13 +84,17 @@ export const App = () => {
         Click me: {numberOfClicks}
       </Button>
       <h1 className={'title'}>Phonebook</h1>
-      <ContactForm onSubmit={handleContactSubmit} />
+      <ContactForm
+      // onSubmit={handleContactSubmit}
+      />
       <h2 className={'title'}>Contacts</h2>
       <>
-        <Filter onChange={handleFilterChange} />
+        <Filter
+        // onChange={handleFilterChange}
+        />
         <ContactList
-          contacts={filteredContacts() !== '' ? filteredContacts() : contacts}
-          onDelete={handleContactDelete}
+        // contacts={filteredContacts() !== '' ? filteredContacts() : contacts}
+        // onDelete={handleContactDelete}
         />
       </>
     </div>

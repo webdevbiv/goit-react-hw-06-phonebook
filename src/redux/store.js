@@ -13,6 +13,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { clicksReducer } from './clicksSlice';
+import { contactsReducer } from './contactsSlice';
 import {
   persistStore,
   FLUSH,
@@ -26,6 +27,7 @@ import {
 export const store = configureStore({
   reducer: {
     clicks: clicksReducer,
+    contacts: contactsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
