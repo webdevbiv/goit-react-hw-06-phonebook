@@ -39,9 +39,4 @@ function ContactList() {
   );
 }
 
-// ContactList.propTypes = {
-//   contacts: PropTypes.array.isRequired,
-//   onDelete: PropTypes.func.isRequired,
-// };
-
 export default ContactList;

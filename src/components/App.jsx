@@ -1,98 +1,16 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { update } from 'redux/clicksSlice';
-import { useState, useEffect } from 'react';
-
 import { ContactForm } from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Button from 'react-bootstrap/Button';
 
 export const App = () => {
-  const numberOfClicks = useSelector(state => state.clicks.value);
-  const contactsState = useSelector(state => state.contacts.list);
-  const dispatch = useDispatch();
-  console.log(contactsState);
-
-  // const [contacts, setContacts] = useState(
-  //   () => JSON.parse(localStorage.getItem('contacts')) ?? []
-  // );
-  // const [filter, setFilter] = useState('');
-
-  // useEffect(() => {
-  //   localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
-
-  // const handleContactSubmit = ({ name, number }) => {
-  //   if (
-  //     contacts.some(
-  //       contact => contact.name.toLowerCase() === name.toLowerCase()
-  //     )
-  //   ) {
-  //     toast.warn(`🦄 ${name} is already in the contacts.`, {
-  //       position: 'top-center',
-  //       autoClose: false,
-  //       hideProgressBar: true,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: false,
-  //       progress: undefined,
-  //       theme: 'light',
-  //     });
-  //   } else {
-  //     setContacts(prev => {
-  //       return [{ id: nanoid(4), name, number }, ...prev];
-  //     });
-  //   }
-  // };
-
-  // const handleFilterChange = e => {
-  //   setFilter(e.target.value);
-  // };
-
-  // const filteredContacts = () => {
-  //   const filteredContacts = contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(filter.toLowerCase())
-  //   );
-  //   return filteredContacts;
-  // };
-
-  // const handleContactDelete = id => {
-  //   setContacts(prev => prev.filter(item => item.id !== id));
-  // };
-
   return (
     <div className={'container'}>
-      <ToastContainer
-        position="top-center"
-        autoClose={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable={false}
-        theme="light"
-      />
-      <Button
-        variant="primary"
-        type="submit"
-        onClick={() => dispatch(update())}
-      >
-        Click me: {numberOfClicks}
-      </Button>
       <h1 className={'title'}>Phonebook</h1>
-      <ContactForm
-      // onSubmit={handleContactSubmit}
-      />
+      <ContactForm />
       <h2 className={'title'}>Contacts</h2>
       <>
-        <Filter
-        // onChange={handleFilterChange}
-        />
-        <ContactList
-        // contacts={filteredContacts() !== '' ? filteredContacts() : contacts}
-        />
+        <Filter />
+        <ContactList />
       </>
     </div>
   );
