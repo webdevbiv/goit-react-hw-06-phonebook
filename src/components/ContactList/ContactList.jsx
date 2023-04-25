@@ -5,23 +5,16 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import s from '../ContactList/ContactList.module.scss';
+import { selectContacts } from 'redux/selectors';
 
 function ContactList() {
   const distpatch = useDispatch();
 
-  const filter = useSelector(state => state.filter.value);
-  const contacts = useSelector(state => state.contacts.list) ?? filter;
-
-  const filteredContacts = () => {
-    const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-    return filteredContacts;
-  };
+  const contacts = useSelector(selectContacts);
 
   return (
     <ListGroup>
-      {filteredContacts().map(contact => (
+      {contacts.map(contact => (
         <ListGroup.Item key={contact.id} className={s.item}>
           <div>
             {contact.name}: {contact.number}
