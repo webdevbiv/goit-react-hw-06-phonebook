@@ -21,12 +21,15 @@ export const ContactForm = () => {
       name: form.elements.name.value,
       number: form.elements.number.value,
     };
+    const isExist = contacts.some(
+      contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
+    );
 
-    if (
-      contacts.some(
-        contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
-      )
-    ) {
+    if (!isExist) {
+      dispatch(addContact(newContact));
+      e.currentTarget.reset();
+    }
+    if (isExist) {
       toast.warn(`🦄 ${newContact.name} is already in the contacts.`, {
         position: 'top-center',
         autoClose: false,
@@ -37,10 +40,7 @@ export const ContactForm = () => {
         progress: undefined,
         theme: 'light',
       });
-    } else {
-      dispatch(addContact(newContact));
     }
-    e.currentTarget.reset();
   };
 
   return (

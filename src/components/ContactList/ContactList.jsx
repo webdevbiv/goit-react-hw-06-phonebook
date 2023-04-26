@@ -5,12 +5,11 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import s from '../ContactList/ContactList.module.scss';
-import { selectContacts } from 'redux/selectors';
+import { getfilteredContacts } from 'redux/selectors';
 
 function ContactList() {
+  const contacts = useSelector(getfilteredContacts);
   const distpatch = useDispatch();
-
-  const contacts = useSelector(selectContacts);
 
   return (
     <ListGroup>
