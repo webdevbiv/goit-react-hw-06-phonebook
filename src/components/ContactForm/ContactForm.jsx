@@ -25,11 +25,7 @@ export const ContactForm = () => {
       contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
     );
 
-    if (!isExist) {
-      dispatch(addContact(newContact));
-      e.currentTarget.reset();
-      return;
-    }
+    e.currentTarget.reset();
     if (isExist) {
       toast.warn(`🦄 ${newContact.name} is already in the contacts.`, {
         position: 'top-center',
@@ -43,6 +39,7 @@ export const ContactForm = () => {
       });
       return;
     }
+    dispatch(addContact(newContact));
   };
 
   return (
