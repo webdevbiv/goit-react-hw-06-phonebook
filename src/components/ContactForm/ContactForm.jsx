@@ -28,6 +28,7 @@ export const ContactForm = () => {
     if (!isExist) {
       dispatch(addContact(newContact));
       e.currentTarget.reset();
+      return;
     }
     if (isExist) {
       toast.warn(`🦄 ${newContact.name} is already in the contacts.`, {
@@ -40,6 +41,7 @@ export const ContactForm = () => {
         progress: undefined,
         theme: 'light',
       });
+      return;
     }
   };
 
